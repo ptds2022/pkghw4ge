@@ -1,0 +1,15 @@
+Package: pkghw4ge
+Type: Package
+Title: Package Homework 4 - Programming Tools in Data Science
+Version: 0.1.0
+Author: Authors@R: c(
+    person("Alistair", "Bisol", email = "alistair.bisol@unil.ch", role = "aut"),
+    person("Andrea", "Ferrazzo", email = "andrea.errazzo@unil.ch", role = "aut"),
+    person("Roberto", "Molinari", email = "jacopo.beghetto@unil.ch", role = c("aut","cre")),
+    person("Manoel", "Pidoux", email = "manoel.pidoux@unil.ch", role = "aut")
+    )
+Maintainer: Jacopo Beghetto <jacopo.beghetto@unil.ch>
+Description: More about what it does.
+             The package contains and will load the functions created in Ex1.
+License: GPL (>= 2)
+Encoding: UTF-8
