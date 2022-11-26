@@ -13,3 +13,4 @@ Description: More about what it does.
              The package contains and will load the functions created in Ex1.
 License: GPL (>= 2)
 Encoding: UTF-8
+RoxygenNote: 7.2.2
