@@ -1,10 +1,10 @@
 library(tidyverse)
 
 #' @title Bootstrap function Modification
-#' @author Group-E
+#' @authors Group-E
 #' @description This bootstrap function will provide you always an object of class 'bootstrap'
-#' @importFrom stats runif
-#' @export
+#' @param
+#' @return
 #' @examples
 #' set.seed(566)
 #' class(Bootstrap(rnorm(100), statistic = mean))
@@ -53,10 +53,9 @@ bootstrap <- function(x, B = 1000, statistic, sample_size = length(x)){
 }
 
 #' @title Bootstrap Print
-#' @author Group-E
+#' @authors Group-E
 #' @description This bootstrap function is a modification of the the bootstrap.function with a different output and the estimated of the variance.
-#' @importFrom stats runif
-#' @export
+#' @return stats runif
 #' @examples
 #' set.seed(566)
 #' boot2 <- Bootstrap(matrix(rnorm(200),nc=2), statistic = var)
@@ -73,10 +72,10 @@ print.bootstrap <- function(x){
 }
 
 #' @title Summary Bootstrap
-#' @author Group-E
+#' @authors Group-E
 #' @description Return an object of class summary.bootstrap that will represent a summary of the bootstrap class.
-#' @importFrom stats runif
-#' @export
+#' @param
+#' @return
 #' @examples
 #' summary(boot)
 summary.bootstrap <- function(x, level = 0.95){
@@ -100,10 +99,10 @@ summary.bootstrap <- function(x, level = 0.95){
 }
 
 #' @title Summary Bootstrap Mod
-#' @author Group-E
+#' @authors Group-E
 #' @description Modification of summary.bootstrap function to obtain "summary(boot, level = 1.2)" and "summary(boot, level = .8)"
-#' @importFrom stats runif
-#' @export
+#' @param
+#' @return
 #' @examples
 #' summary(boot, level = 1.2)
 summary.bootstrap.mod <- function(x, level = 0.95){
@@ -132,10 +131,10 @@ summary.bootstrap.mod <- function(x, level = 0.95){
 }
 
 #' @title Plot Boot H
-#' @author GroupE
+#' @authors GroupE
 #' @description Provide a vertical box-plot of the class bootstrap
-#' @importFrom stats runif
-#' @export
+#' @param
+#' @return
 #' @examples
 #' plot(boot)
 plot.bootstrap.h <- function(x){
@@ -143,10 +142,10 @@ plot.bootstrap.h <- function(x){
 }
 
 #' @title Plot Boot V
-#' @author Group-E
+#' @authors Group-E
 #' @description Provide an horizontal box-plot of the class bootstrap
-#' @importFrom stats runif
-#' @export
+#' @param
+#' @return
 #' @examples
 #' plot(boot, main = "Test", cex=2, horizontal = T)
 plot.bootstrap.v <- function(x, main ="Bootstrap estimates", pch = 19 , cex = 1 , horizontal = F){

@@ -3,7 +3,7 @@ output: github_document
 
 # Package Functionalities
   
-**Description of the package**: This package will run the functions created in the homework4 exercise 1. This functions from now they will an intrgral part of the package.
+**Description of the package**: This package will run the functions created in the homework4 exercise 1. This functions from now they will an integral part of the package.
 
 
 ```{r, include=FALSE}
