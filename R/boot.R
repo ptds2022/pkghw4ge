@@ -1,5 +1,3 @@
-library(tidyverse)
-
 #' @title Bootstrap function Modification
 #' @authors Group-E
 #' @description This bootstrap function will provide you always an object of class 'bootstrap'
