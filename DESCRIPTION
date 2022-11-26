@@ -11,6 +11,10 @@ Author: Authors@R: c(
 Maintainer: Jacopo Beghetto <jacopo.beghetto@unil.ch>
 Description: More about what it does.
              The package contains and will load the functions created in Ex1.
+             You will find so functions as: 'bootstrap', 'plot.bootstrap.h', 
+             'plot.bootstrap.v', 'print.bootstrap', 'print.summary.bootrsap'
+             'print.summary.bootrsap.mod', 'summary.bootstrap' and 
+             'summary.bootstrap.mod'.
 License: GPL (>= 2)
 Encoding: UTF-8
 RoxygenNote: 7.2.2
