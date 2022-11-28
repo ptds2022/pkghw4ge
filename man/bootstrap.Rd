@@ -32,7 +32,7 @@ A \code{list} of type bootstrap.class composed of relevant values provided by th
 This Bootstrap function will provide you always an object of class bootstrap.
 }
 \examples{
-Bootstrap(rnorm(100), statistic = mean)
+pkghw4ge::Bootstrap(stats::rnorm(100), statistic = mean)
 }
 \author{
 Group-E
