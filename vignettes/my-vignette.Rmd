@@ -1,0 +1,26 @@
+---
+title: "my-vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{my-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(pkghw4ge)
+```
+
+You will need to load the following packages: **tidyverse** and in particular **stats**.
+
+Description: More about what it does.
+             The package contains and will load the functions created in Ex1.
+             You will find so functions as: 'Bootstrap', 'plot.bootstrap', 
+             'print.bootstrap','summary.bootstrap' and 'summary.bootstrap.mod'.
