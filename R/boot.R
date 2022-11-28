@@ -17,7 +17,8 @@
 #'     \item{sample_size}{Return the length of every bootstrap sample}
 #' }
 #' @examples
-#' pkghw4ge::Bootstrap(stats::rnorm(100), statistic = mean)
+#' pkghw4ge::Bootstrap(rnorm(100), statistic = mean)
+#' @export
 Bootstrap <- function(x, B = 1000, statistic, sample_size = length(x)){
   coerced_to_a_vector <- FALSE
   if(any(!is.numeric(x))){
@@ -70,6 +71,7 @@ Bootstrap <- function(x, B = 1000, statistic, sample_size = length(x)){
 #' @examples
 #' boot2 <- Bootstrap(matrix(rnorm(200),nc=2), statistic = var)
 #' boot2
+#' @export
 print.bootstrap <- function(x){
   if (x$coerced_to_a_vector == FALSE){
     cat(paste("Non-parametric bootstrap estimate of the variance of ", "'",x$stat,"'\n", sep = ""))
@@ -103,6 +105,7 @@ print.bootstrap <- function(x){
 #' @examples
 #' boot <- Bootstrap(rnorm(100), statistic = var)
 #' summary(boot, level = 0.90)
+#' @export
 summary.bootstrap <- function(x, level = 0.95, digits= 2, ...){
 
   if(any(level > 1) | (level< 0)){
@@ -148,6 +151,7 @@ summary.bootstrap <- function(x, level = 0.95, digits= 2, ...){
 #' @examples
 #' boot <- Bootstrap(rnorm(100), statistic = var)
 #' print(summary(boot), digits=5)
+#' @export
 print.summary.bootstrap <- function(x, digits = 2){
   CI <- x$CI
   CI <- round(CI, digits = digits)
@@ -184,6 +188,7 @@ print.summary.bootstrap <- function(x, digits = 2){
 #' @examples
 #' boot <- Bootstrap(rnorm(100), statistic = var)
 #' plot(boot, main = "Test", cex=2, horizontal = T)
+#' @export
 plot.bootstrap <- function(x, main ="Bootstrap estimates", pch = 19 , cex = 1 , horizontal = F){
   boxplot(x$theta_star, col = "darkgreen", main = main, pch = pch, cex = cex , horizontal = horizontal)
 }
