@@ -17,7 +17,7 @@
 #'     \item{sample_size}{Return the length of every bootstrap sample}
 #' }
 #' @examples
-#' pkghw4ge::Bootstrap(rnorm(100), statistic = mean)
+#' Bootstrap(rnorm(100), statistic = mean)
 #' @export
 Bootstrap <- function(x, B = 1000, statistic, sample_size = length(x)){
   coerced_to_a_vector <- FALSE
