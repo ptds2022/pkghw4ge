@@ -36,7 +36,7 @@ Bootstrap <- function(x, B = 1000, statistic, sample_size = length(x)){
   }
   if(any(is.na(x))){
     x <- x[!is.na(x)]
-    warning("some NA in 'x' has been removed")
+    warning("some NA in 'x' has been removed\n")
     if(is.null(match.call()$sample_size)){
       sample_size <- length(x)
       warning("readjustment of the default sample size, new size =", sample_size)
@@ -44,7 +44,7 @@ Bootstrap <- function(x, B = 1000, statistic, sample_size = length(x)){
   }
   theta_hat <- statistic(x)
   Bootsptrapped_list <- 1:B
-  for (i in 1:B){Bootsptrapped_list[i] <-  statistic(rnorm(n= sample_size, mean= mean(x), sd=sqrt(var(x))))}
+  for (i in 1:B){Bootsptrapped_list[i] <- statistic(sample(x, replace = TRUE, size = sample_size))}
   Unbiased_estimator <- 0
   for (i in 1:B){Unbiased_estimator <- Unbiased_estimator + (Bootsptrapped_list[i]- theta_hat)**2}
   Unbiased_estimator <- Unbiased_estimator/(B -1 )
