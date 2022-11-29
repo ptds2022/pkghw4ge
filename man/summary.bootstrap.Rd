@@ -4,7 +4,7 @@
 \alias{summary.bootstrap}
 \title{Summary Bootstrap}
 \usage{
-\method{summary}{bootstrap}(x, level = 0.95, digits = 2, ...)
+\method{summary}{bootstrap}(x, level, digits, ...)
 }
 \arguments{
 \item{x}{is the output-list returned from the Bootstrap function}

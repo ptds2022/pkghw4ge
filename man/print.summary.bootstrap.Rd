@@ -4,12 +4,13 @@
 \alias{print.summary.bootstrap}
 \title{Print Summary Bootstrap}
 \usage{
-\method{print}{summary.bootstrap}(x, digits = 2)
+\method{print}{summary.bootstrap}(x, digits, ...)
 }
 \arguments{
 \item{x}{is the output-list returned from the summary.bootstrap function}
 
-\item{digits}{are the decimals points desired in the printed output. By default digits = 2}
+\item{digits}{are the decimals points desired in the printed output. By default digits = 2
+@param ... other parameters for the 'print.summary.bootstrap' function}
 }
 \value{
 A \code{print} of the main summary information from the Bootstrap function with the modified digits arguments. This \code{print} complementary of the first print summary.bootstrap function.
