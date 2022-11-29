@@ -15,8 +15,9 @@
 
 \item{cex}{size of the outliers dots. By default is 1}
 
-\item{horizontal}{is the orientation of the box-plot. By default is F
-@param ... other parameters for the 'plot.bootstrap' function}
+\item{horizontal}{is the orientation of the box-plot. By default is F}
+
+\item{...}{other parameters for the 'plot.bootstrap' function}
 }
 \value{
 A \code{boxplot} of the bootstrap estimates.
