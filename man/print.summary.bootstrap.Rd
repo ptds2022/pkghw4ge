@@ -4,7 +4,7 @@
 \alias{print.summary.bootstrap}
 \title{Print Summary Bootstrap}
 \usage{
-\method{print}{summary.bootstrap}(x, ...)
+\method{print}{summary.bootstrap}(x, digit, ...)
 }
 \arguments{
 \item{x}{is the output-list returned from the summary.bootstrap function}

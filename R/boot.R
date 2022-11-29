@@ -164,8 +164,8 @@ summary.bootstrap <- function(x, level, digits,...){
 #' boot <- Bootstrap(rnorm(100), statistic = var)
 #' print(summary(boot), digits=5)
 #' @export
-print.summary.bootstrap <- function(x,  ...){
-  if(is_empty(digits)) {
+print.summary.bootstrap <- function(x,digit,  ...){
+  if(missing(digit)) {
     digits=2
   }
   CI <- x$CI
