@@ -1,4 +1,4 @@
-Package - Homework 4 - Programming Tools in Data Science
+Package Group E - Homework 4 - Programming Tools in Data Science
 
 The package contains various functions that will allow you to mainly use the a bootstrap modification from the previous homework3.    
 The 'Bootstrap' function will provide you always an object of class bootstrap.    
