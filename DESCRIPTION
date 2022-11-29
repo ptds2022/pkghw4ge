@@ -26,7 +26,8 @@ Encoding: UTF-8
 RoxygenNote: 7.2.2
 Depends: R (>= 4.0.0) 
 Imports: stats (>= 4.2.1),
-         graphics (>= 4.2.1)
+         graphics (>= 4.2.1),
+         purrr (>= 0.3.5)
 Suggests: 
     knitr,
     rmarkdown,
