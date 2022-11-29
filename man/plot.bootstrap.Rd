@@ -25,7 +25,7 @@ It is a method of the original plot function made for the bootstrap class. It wi
 }
 \examples{
 boot <- Bootstrap(rnorm(100), statistic = var)
-plot(boot, main = "Test", cex=2, horizontal = T)
+plot(boot, main = "Test", cex=2, horizontal = TRUE)
 }
 \author{
 Group-E
