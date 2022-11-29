@@ -20,47 +20,53 @@
 #' @examples
 #' Bootstrap(rnorm(100), statistic = mean)
 #' @export
-Bootstrap <- function(x, B = 1000, statistic, sample_size = length(x)){
+Bootstrap <- function(x, B = 1000, statistic, sample_size = length(x)) {
   coerced_to_a_vector <- FALSE
-  if(any(!is.numeric(x))){
+  if (any(!is.numeric(x))) {
     stop("'x' must be numeric")
   }
-  if(any(!is.numeric(B))){
+  if (any(!is.numeric(B))) {
     stop("'B' must be numeric")
   }
-  if(any(!is.function(statistic))){
+  if (any(!is.function(statistic))) {
     stop("'statistic' must be a function")
   }
-  if(any(!is.vector(x))){
+  if (any(!is.vector(x))) {
     x <- as.vector(x)
     coerced_to_a_vector <- TRUE
     warning("'x' has been coerced to a vector")
   }
-  if(any(is.na(x))){
+  if (any(is.na(x))) {
     x <- x[!is.na(x)]
     warning("some NA in 'x' has been removed\n")
-    if(is.null(match.call()$sample_size)){
+    if (is.null(match.call()$sample_size)) {
       sample_size <- length(x)
       warning("readjustment of the default sample size, new size =", sample_size)
     }
   }
   theta_hat <- statistic(x)
   Bootsptrapped_list <- 1:B
-  for (i in 1:B){Bootsptrapped_list[i] <- statistic(sample(x, replace = TRUE, size = sample_size))}
+  for (i in 1:B) {
+    Bootsptrapped_list[i] <- statistic(sample(x, replace = TRUE, size = sample_size))
+  }
   Unbiased_estimator <- 0
-  for (i in 1:B){Unbiased_estimator <- Unbiased_estimator + (Bootsptrapped_list[i]- theta_hat)**2}
-  Unbiased_estimator <- Unbiased_estimator/(B -1 )
+  for (i in 1:B) {
+    Unbiased_estimator <- Unbiased_estimator + (Bootsptrapped_list[i] - theta_hat)**2
+  }
+  Unbiased_estimator <- Unbiased_estimator / (B - 1)
   theta_star <- Bootsptrapped_list
   varBoot <- var(Bootsptrapped_list)
   Unbiased_estimator <- Unbiased_estimator
-  final_list <- structure(list("theta_hat"= theta_hat,
-                               "theta_star"= theta_star,
-                               "varBoot"=varBoot,
-                               "Unbiased_estimator"=Unbiased_estimator,
-                               "coerced_to_a_vector" = coerced_to_a_vector,
-                               "stat"= as.character(substitute(statistic)),
-                               "B" = B,
-                               "sample_size" = sample_size), class= "bootstrap")
+  final_list <- structure(list(
+    "theta_hat" = theta_hat,
+    "theta_star" = theta_star,
+    "varBoot" = varBoot,
+    "Unbiased_estimator" = Unbiased_estimator,
+    "coerced_to_a_vector" = coerced_to_a_vector,
+    "stat" = as.character(substitute(statistic)),
+    "B" = B,
+    "sample_size" = sample_size
+  ), class = "bootstrap")
   return(final_list)
 }
 
@@ -72,18 +78,19 @@ Bootstrap <- function(x, B = 1000, statistic, sample_size = length(x)){
 #' @param ... other parameters for the 'prnt.bootstrap' function
 #' @return A \code{print} of relevant information provided by the Bootstrap function.
 #' @examples
-#' boot2 <- Bootstrap(matrix(rnorm(200),nc=2), statistic = var)
+#' boot2 <- Bootstrap(matrix(rnorm(200), nc = 2), statistic = var)
 #' print(boot2)
 #' @export
-print.bootstrap <- function(x,...){
-  if (x$coerced_to_a_vector == FALSE){
-    cat(paste("Non-parametric bootstrap estimate of the variance of ", "'",x$stat,"'\n", sep = ""))
+print.bootstrap <- function(x, ...) {
+  if (x$coerced_to_a_vector == FALSE) {
+    cat(paste("Non-parametric bootstrap estimate of the variance of ", "'", x$stat, "'\n", sep = ""))
+  } else {
+    cat(paste("Non-parametric bootstrap for ", "'", x$stat, "'\n", sep = ""))
   }
-  else {cat(paste("Non-parametric bootstrap for ", "'",x$stat,"'\n", sep = ""))}
   cat("-----------------\n")
-  cat(paste("Variance estimate is", round(x$varBoot,4), "\n"))
+  cat(paste("Variance estimate is", round(x$varBoot, 4), "\n"))
   cat(paste("Based on B=", x$B, " bootstrap replicates\n", sep = ""))
-  cat(paste("and a sample of size:",x$sample_size, "\n"))
+  cat(paste("and a sample of size:", x$sample_size, "\n"))
 }
 
 
@@ -105,50 +112,52 @@ print.bootstrap <- function(x,...){
 #'     \item{level}{Represent the confidence level of 1-alpha called as a parameter}
 #'     \item{stat}{Return the name of the statistic used thruough the Bootstrap function}
 #'     \item{B}{Number of bootrsapped samples thourgh the Bootstrap function}
-#'}
+#' }
 #' @examples
 #' boot <- Bootstrap(rnorm(100), statistic = var)
 #' summary(boot, level = 0.90)
 #' @export
-summary.bootstrap <- function(x, level, digits,...){
-  if(missing(level)) {
-    level=0.95
+summary.bootstrap <- function(x, level, digits, ...) {
+  if (missing(level)) {
+    level <- 0.95
   }
-  if(missing(digits)) {
-    digits=2
+  if (missing(digits)) {
+    digits <- 2
   }
-  if(any(level > 1) | (level< 0)){
+  if (any(level > 1) | (level < 0)) {
     stop("'level' must be in (0,1)")
   }
 
-  Z <- qnorm(p= (1-level)/2, lower.tail = FALSE)
-  CI1 <- c(x$theta_hat - sqrt(x$varBoot)*Z, x$theta_hat + sqrt(x$varBoot)*Z)
+  Z <- qnorm(p = (1 - level) / 2, lower.tail = FALSE)
+  CI1 <- c(x$theta_hat - sqrt(x$varBoot) * Z, x$theta_hat + sqrt(x$varBoot) * Z)
   CI <- round(CI1, digits = digits)
   sto1 <- x$theta_hat
-  sto <- round(sto1, digits= digits )
-  cat(paste("Non-parametric bootstrap for ", "'",x$stat,"'\n", sep = ""))
-  cat(paste("Number of bootstrap replicates:",x$B, "\n"))
+  sto <- round(sto1, digits = digits)
+  cat(paste("Non-parametric bootstrap for ", "'", x$stat, "'\n", sep = ""))
+  cat(paste("Number of bootstrap replicates:", x$B, "\n"))
   cat("\n")
-  cat(paste("Statistic on the sample 'x': ", x$stat,"(x)=",sto,"\n", sep = ""))
+  cat(paste("Statistic on the sample 'x': ", x$stat, "(x)=", sto, "\n", sep = ""))
 
-  if (x$coerced_to_a_vector == TRUE){
+  if (x$coerced_to_a_vector == TRUE) {
     cat("Notice: 'x' was coerced to a vector\n")
   }
 
   cat("\n")
-  cat(paste("Confidence interval at the ", level*100,"%-level:\n", sep = ""))
-  cat(CI,"\n")
+  cat(paste("Confidence interval at the ", level * 100, "%-level:\n", sep = ""))
+  cat(CI, "\n")
   cat("\n")
   cat("Bootstrap estimates:\n")
-  print(summary(x$theta_star),  digits= digits)
+  print(summary(x$theta_star), digits = digits)
 
-  return(invisible(structure(list("summary"= summary(x$theta_star),
-                                  "CI" = CI1,
-                                  "sto"= sto1,
-                                  "coerced_to_a_vector"=x$coerced_to_a_vector,
-                                  "level"= level,
-                                  "stat" = x$stat,
-                                  "B" = x$B), class = "summary.bootstrap")))
+  return(invisible(structure(list(
+    "summary" = summary(x$theta_star),
+    "CI" = CI1,
+    "sto" = sto1,
+    "coerced_to_a_vector" = x$coerced_to_a_vector,
+    "level" = level,
+    "stat" = x$stat,
+    "B" = x$B
+  ), class = "summary.bootstrap")))
 }
 
 #' @title Print Summary Bootstrap
@@ -161,29 +170,29 @@ summary.bootstrap <- function(x, level, digits,...){
 #' @return A \code{print} of the main summary information from the Bootstrap function with the modified digits arguments. This \code{print} complementary of the first print summary.bootstrap function.
 #' @examples
 #' boot <- Bootstrap(rnorm(100), statistic = var)
-#' print(summary(boot), digits=5)
+#' print(summary(boot), digits = 5)
 #' @export
-print.summary.bootstrap <- function(x,digits,  ...){
-  if(missing(digits)) {
-    digits=2
+print.summary.bootstrap <- function(x, digits, ...) {
+  if (missing(digits)) {
+    digits <- 2
   }
   CI <- x$CI
   CI <- round(CI, digits = digits)
   sto <- x$sto
-  sto <- round(sto, digits= digits )
-  cat(paste("\n\n\n\ ----------------- \n\nWith application of", digits,  "decimal places\n\n"))
-  cat(paste("Non-parametric bootstrap for ", "'",x$stat,"'\n", sep = ""))
-  cat(paste("Number of bootstrap replicates:",x$B, "\n"))
+  sto <- round(sto, digits = digits)
+  cat(paste("\n\n\n\ ----------------- \n\nWith application of", digits, "decimal places\n\n"))
+  cat(paste("Non-parametric bootstrap for ", "'", x$stat, "'\n", sep = ""))
+  cat(paste("Number of bootstrap replicates:", x$B, "\n"))
   cat("\n")
-  cat(paste("Statistic on the sample 'x': ", x$stat,"(x)=",sto,"\n", sep = ""))
+  cat(paste("Statistic on the sample 'x': ", x$stat, "(x)=", sto, "\n", sep = ""))
 
-  if (x$coerced_to_a_vector == TRUE){
+  if (x$coerced_to_a_vector == TRUE) {
     cat("Notice: 'x' was coerced to a vector\n")
   }
 
   cat("\n")
-  cat(paste("Confidence interval at the ", x$level*100,"%-level:\n", sep = ""))
-  cat(CI,"\n")
+  cat(paste("Confidence interval at the ", x$level * 100, "%-level:\n", sep = ""))
+  cat(CI, "\n")
   cat("\n")
   cat("Bootstrap estimates:\n")
   print(x$summary, digits = digits)
@@ -203,20 +212,20 @@ print.summary.bootstrap <- function(x,digits,  ...){
 #' @return A \code{boxplot} of the bootstrap estimates.
 #' @examples
 #' boot <- Bootstrap(rnorm(100), statistic = var)
-#' plot(boot, main = "Test", cex=2, horizontal = TRUE)
+#' plot(boot, main = "Test", cex = 2, horizontal = TRUE)
 #' @export
-plot.bootstrap <- function(x, main, pch , cex , horizontal, ...){
-  if(missing(main)) {
-    main ="Bootstrap estimates"
+plot.bootstrap <- function(x, main, pch, cex, horizontal, ...) {
+  if (missing(main)) {
+    main <- "Bootstrap estimates"
   }
-  if(missing(pch)) {
-    pch = 19
+  if (missing(pch)) {
+    pch <- 19
   }
-  if(missing(cex)) {
-    cex = 1
+  if (missing(cex)) {
+    cex <- 1
   }
-  if(missing(horizontal)) {
-    horizontal = FALSE
+  if (missing(horizontal)) {
+    horizontal <- FALSE
   }
-  boxplot(x$theta_star, col = "darkgreen", main = main, pch = pch, cex = cex , horizontal = horizontal)
+  boxplot(x$theta_star, col = "darkgreen", main = main, pch = pch, cex = cex, horizontal = horizontal)
 }

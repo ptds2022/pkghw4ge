@@ -11,7 +11,7 @@ test_that("Summary Bootstrap with incorrect input", {
 })
 
 test_that("Print Summary Bootstrap will return a warning from the Bootstrap function", {
-  expect_warning(print(summary(Bootstrap(matrix(rnorm(200),nc=2), statistic = var))))
+  expect_warning(print(summary(Bootstrap(matrix(rnorm(200), nc = 2), statistic = var))))
 })
 
 test_that("Bootstrap return error with incorrect input", {
