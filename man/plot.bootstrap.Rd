@@ -4,7 +4,7 @@
 \alias{plot.bootstrap}
 \title{Plot Bootstrap}
 \usage{
-\method{plot}{bootstrap}(x, main = "Bootstrap estimates", pch = 19, cex = 1, horizontal = F)
+\method{plot}{bootstrap}(x, main, pch, cex, horizontal, ...)
 }
 \arguments{
 \item{x}{is the output-list returned from the Bootstrap function}
@@ -15,7 +15,8 @@
 
 \item{cex}{size of the outliers dots. By default is 1}
 
-\item{horizontal}{is the orientation of the box-plot. By default is F}
+\item{horizontal}{is the orientation of the box-plot. By default is F
+@param ... other parameters for the 'plot.bootstrap' function}
 }
 \value{
 A \code{boxplot} of the bootstrap estimates.

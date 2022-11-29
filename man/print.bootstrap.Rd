@@ -4,10 +4,12 @@
 \alias{print.bootstrap}
 \title{Bootstrap Print Modification}
 \usage{
-\method{print}{bootstrap}(x)
+\method{print}{bootstrap}(x, ...)
 }
 \arguments{
 \item{x}{is the output-list returned from the Bootstrap function.}
+
+\item{...}{other parameters for the 'prnt.bootstrap' function}
 }
 \value{
 A \code{print} of relevant information provided by the Bootstrap function.
