@@ -21,7 +21,7 @@ This print.summary.bootstrap function is a method of the basic print function. I
 }
 \examples{
 boot <- Bootstrap(rnorm(100), statistic = var)
-print(summary(boot), digits=5)
+print(summary(boot), digits = 5)
 }
 \author{
 Group-E
